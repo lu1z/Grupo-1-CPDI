@@ -45,7 +45,7 @@ function scene:create( event )
 	local groupTrees = display.newGroup()
 	groupTrees.anchorX = 0
 	groupTrees.anchorY = 0
-	for i = 0, 200 do
+	for i = 0, 50 do
 		trees[i] = display.newImageRect( groupTrees, "crate.png", 90, 90 )
 		trees[i].x, trees[i].y = unpack(randomCoordinate());
 		physics.addBody( trees[i], "static" )
