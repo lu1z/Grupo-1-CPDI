@@ -28,6 +28,8 @@ function scene:create( event )
 	-- running until the scene is on the screen.
 	physics.start()
 	physics.pause()
+	-- Exibição do graficos coloridos para testar o comportamento físico.
+	physics.setDrawMode( "hybrid" )
 
 
 	-- create a grey rectangle as the backdrop
