@@ -15,6 +15,9 @@ local physics = require "physics"
 -- forward declarations and other locals
 local screenW, screenH, halfW = display.actualContentWidth, display.actualContentHeight, display.contentCenterX
 
+local x = display.contentWidth
+local y = display.contentHeight
+
 function scene:create( event )
 
 	-- Called when the scene's view does not exist.
