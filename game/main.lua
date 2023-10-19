@@ -11,4 +11,7 @@ display.setStatusBar( display.HiddenStatusBar )
 local composer = require "composer"
 
 -- load menu screen
-composer.gotoScene( "menu" )
+composer.gotoScene( "game" )
+
+local fireSound = audio.loadSound( "" )
+local explosionSound = audio.loadSound( "explosion.mp3" )

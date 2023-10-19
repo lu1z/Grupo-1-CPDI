@@ -1,9 +1,9 @@
 -----------------------------------------------------------------------------------------
 --
--- level1.lua
+-- game.lua
 --
 -----------------------------------------------------------------------------------------
-
+require("helpers");
 local composer = require( "composer" )
 local scene = composer.newScene()
 
@@ -37,15 +37,26 @@ function scene:create( event )
 	local background = display.newRect( display.screenOriginX, display.screenOriginY, screenW, screenH )
 	background.anchorX = 0 
 	background.anchorY = 0
-	background:setFillColor( .5 )
+	local green = { 0, 0.5, 0, 1 }
+	background:setFillColor( unpack(green) )
 	
 	-- make a crate (off-screen), position it, and rotate slightly
-	local crate = display.newImageRect( "crate.png", 90, 90 )
-	crate.x, crate.y = 160, -100
-	crate.rotation = 15
+	local trees = {}
+	local groupTrees = display.newGroup()
+	groupTrees.anchorX = 0
+	groupTrees.anchorY = 0
+	for i = 0, 200 do
+		trees[i] = display.newImageRect( groupTrees, "crate.png", 90, 90 )
+		trees[i].x, trees[i].y = unpack(randomCoordinate());
+		physics.addBody( trees[i], "static" )
+	end
+
+	-- local tree = display.newImageRect( "crate.png", 90, 90 )
+	-- tree.x, tree.y = display.contentCenterX, display.contentCenterY
+	-- tree.rotation = 15
 	
 	-- add physics to the crate
-	physics.addBody( crate, { density=1.0, friction=0.3, bounce=0.3 } )
+	-- physics.addBody( tree, "static" )
 	
 	-- create a grass object and add physics (with custom shape)
 	local grass = display.newImageRect( "grass.png", screenW, 82 )
@@ -61,7 +72,7 @@ function scene:create( event )
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
 	sceneGroup:insert( grass)
-	sceneGroup:insert( crate )
+	sceneGroup:insert( groupTrees )
 end
 
 
