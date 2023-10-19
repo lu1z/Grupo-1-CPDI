@@ -107,7 +107,8 @@ physics.start()
 local bombeiro = display.newSprite( spriteBombeiro, animacao )
 bombeiro.x = display.contentCenterX
 bombeiro.y = display.contentCenterY
-physics.addBody( bombeiro, "dynamic", {
+bombeiro:scale(3,3);
+physics.addBody( bombeiro, "kinematic", {
 	box = {x = 2, y = 0, halfWidth = 7, halfHeight = 15}
 } )
 bombeiro.id = "bombeiroID"
