@@ -77,6 +77,42 @@ function scene:create( event )
 	sceneGroup:insert( groupTrees )
 end
 
+-- LEITURA INICIAL DA SPRITE SHEET PERSONAGEM
+
+local spriteBombeiro = graphics.newImageSheet( "recursos/personagem/bombeiro.png", {
+	width = 156/3,
+	height = 156/3,
+	numFrames = 9,
+	sheetContentWidth = 156,
+	sheetContentHeight = 156
+})
+
+-- ORGANIZAÇÃO DAS ANIMAÇÕES NA SPRITESHEET
+
+local animacao = {
+	{name = "parado", start = 1, count = 1},
+	{name = "andar", start = 2, count = 4, time = 450, loopCount = 0},
+	{name = "cima", start = 6, count = 1},
+	{name = "baixo", start = 7, count = 1}
+}
+
+-- ADICIONANDO CORPO JOGADOR
+
+physics.start()
+
+
+local bombeiro = display.newSprite( spriteBombeiro, animacao )
+bombeiro.x = display.contentCenterX
+bombeiro.y = display.contentCenterY
+physics.addBody( bombeiro, "dynamic", {
+	box = {x = 2, y = 0, halfWidth = 7, halfHeight = 15}
+} )
+bombeiro.id = "bombeiroID"
+bombeiro.direcao = "andar"
+bombeiro.isFixedRotation = true
+bombeiro:setSequence("andar")
+bombeiro:play()
+
 
 function scene:show( event )
 	local sceneGroup = self.view
