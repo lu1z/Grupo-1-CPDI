@@ -110,7 +110,7 @@ physics.addBody( bombeiro, "dynamic", {
 bombeiro.id = "bombeiroID"
 bombeiro.direcao = "andar"
 bombeiro.isFixedRotation = true
-bombeiro:setSequence("andar")
+bombeiro:setSequence("parado")
 bombeiro:play()
 
 
