@@ -82,7 +82,7 @@ end
 
 -- LEITURA INICIAL DA SPRITE SHEET PERSONAGEM
 
-local spriteBombeiro = graphics.newImageSheet( "recursos/personagem/bombeiro.png", {
+local spriteBombeiro = graphics.newImageSheet( "/recursos/personagem/bombeiro.png", {
 	width = 156/3,
 	height = 156/3,
 	numFrames = 9,
@@ -95,8 +95,8 @@ local spriteBombeiro = graphics.newImageSheet( "recursos/personagem/bombeiro.png
 local animacao = {
 	{name = "parado", start = 1, count = 1},
 	{name = "andar", start = 2, count = 4, time = 450, loopCount = 0},
-	{name = "cima", start = 6, count = 2},
-	{name = "baixo", start = 8, count = 2}
+	{name = "cima", start = 6, count = 2, time = 400, loopCount= 0 },
+	{name = "baixo", start = 8, count = 2, time = 400, loopCount = 0}
 }
 
 -- ADICIONANDO CORPO JOGADOR
