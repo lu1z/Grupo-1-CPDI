@@ -95,8 +95,8 @@ local spriteBombeiro = graphics.newImageSheet( "recursos/personagem/bombeiro.png
 local animacao = {
 	{name = "parado", start = 1, count = 1},
 	{name = "andar", start = 2, count = 4, time = 450, loopCount = 0},
-	{name = "cima", start = 6, count = 1},
-	{name = "baixo", start = 7, count = 1}
+	{name = "cima", start = 6, count = 2},
+	{name = "baixo", start = 8, count = 2}
 }
 
 -- ADICIONANDO CORPO JOGADOR
