@@ -133,6 +133,22 @@ function scene:show( event )
 	end
 end
 
+function walk( event )
+	if event.phase == "ended" then
+		bombeiro:setLinearVelocity( 0, 0 )
+		bombeiro:setSequence("parado")
+		return
+	end
+	local forcaX = event.x - bombeiro.x
+	local forcaY = event.y - bombeiro.y
+	bombeiro:setLinearVelocity( forcaX, forcaY )
+	if forcaY < 0 then
+		bombeiro:setSequence("baixo")
+	else
+		bombeiro:setSequence("cima")
+	end
+end
+Runtime:addEventListener("touch", walk)
 function scene:hide( event )
 	local sceneGroup = self.view
 	
