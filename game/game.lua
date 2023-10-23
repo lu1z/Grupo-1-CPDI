@@ -17,6 +17,8 @@ local screenW, screenH, halfW = display.actualContentWidth, display.actualConten
 
 local x = display.contentWidth
 local y = display.contentHeight
+local meioX = display.contentCenterX
+local meioY = display.contentCenterY
 
 function scene:create( event )
 
@@ -51,7 +53,7 @@ function scene:create( event )
 	groupTrees.anchorX = 0
 	groupTrees.anchorY = 0
 	for i = 0, 50 do
-		trees[i] = display.newImageRect( groupTrees, "crate.png", 90, 90 )
+		trees[i] = display.newImageRect( groupTrees, "recursos/objetos/arvore1.png", 90, 90 )
 		trees[i].x, trees[i].y = unpack(randomCoordinate());
 		physics.addBody( trees[i], "static" )
 	end
