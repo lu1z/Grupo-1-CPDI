@@ -94,8 +94,8 @@ bombeiro.x = display.contentCenterX
 bombeiro.y = display.contentCenterY
 bombeiro:scale(3,3);
 physics.addBody( bombeiro, "kinematic", {
-	box = {x = 2, y = 0, halfWidth = 70, halfHeight = 150}
-} )
+	box = {x = 2, y = 0, halfWidth = 70, halfHeight = 150}, name = "bombeiro"
+}, { radius = 100, name = "mangueira", isSensor=true } )
 bombeiro.id = "bombeiroID"
 bombeiro.direcao = "andar"
 bombeiro.isFixedRotation = true
