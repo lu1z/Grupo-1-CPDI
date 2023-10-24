@@ -95,8 +95,8 @@ local spriteBombeiro = graphics.newImageSheet( "recursos/personagem/bombeiro.png
 local animacao = {
 	{name = "parado", start = 1, count = 1},
 	{name = "andar", start = 2, count = 4, time = 450, loopCount = 0},
-	{name = "cima", start = 6, count = 2},
-	{name = "baixo", start = 8, count = 2}
+	{name = "cima", start = 6, count = 2, time = 60},
+	{name = "baixo", start = 8, count = 2, time = 60}
 }
 
 -- ADICIONANDO CORPO JOGADOR
@@ -137,16 +137,40 @@ function walk( event )
 	if event.phase == "ended" then
 		bombeiro:setLinearVelocity( 0, 0 )
 		bombeiro:setSequence("parado")
+		bombeiro:pause()
 		return
 	end
 	local forcaX = event.x - bombeiro.x
 	local forcaY = event.y - bombeiro.y
 	bombeiro:setLinearVelocity( forcaX, forcaY )
-	if forcaY < 0 then
-		bombeiro:setSequence("baixo")
+
+	if math.abs(forcaX) > math.abs(forcaY) then
+		if forcaX < 0 then
+			if bombeiro.xScale < 0 and bombeiro.isPlaying and bombeiro.sequence == "andar" then
+				return
+			end
+			bombeiro.xScale = -3
+		else
+			if bombeiro.xScale > 0 and bombeiro.isPlaying and bombeiro.sequence == "andar" then
+				return
+			end
+			bombeiro.xScale = 3
+		end
+		bombeiro:setSequence("andar")
 	else
-		bombeiro:setSequence("cima")
+		if forcaY < 0 then
+			if bombeiro.isPlaying and bombeiro.sequence == "baixo" then
+				return
+			end
+			bombeiro:setSequence("baixo")
+		else
+			if bombeiro.isPlaying and bombeiro.sequence == "cima" then
+				return
+			end
+			bombeiro:setSequence("cima")
+		end
 	end
+	bombeiro:play()
 end
 Runtime:addEventListener("touch", walk)
 function scene:hide( event )
