@@ -40,18 +40,16 @@ function scene:create( event )
 	physics.start()
 	physics.pause()
 	-- Exibição do graficos coloridos para testar o comportamento físico.
-	physics.setDrawMode( "hybrid" )
+	physics.setDrawMode( "normal" )
 
 
 	-- create a grey rectangle as the backdrop
 	-- the physical screen will likely be a different shape than our defined content area
 	-- since we are going to position the background from it's top, left corner, draw the
 	-- background at the real top, left corner.
-	local background = display.newRect( display.screenOriginX, display.screenOriginY, screenW, screenH )
+	local background = display.newImageRect( "recursos/cenario/grama.png", x, y )
 	background.anchorX = 0 
 	background.anchorY = 0
-	local green = { 0, 0.5, 0, 1 }
-	background:setFillColor( unpack(green) )
 	
 	local groupTrees = display.newGroup()
 	groupTrees.anchorX = 0
