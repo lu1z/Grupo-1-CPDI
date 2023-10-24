@@ -139,16 +139,40 @@ function walk( event )
 	if event.phase == "ended" then
 		bombeiro:setLinearVelocity( 0, 0 )
 		bombeiro:setSequence("parado")
+		bombeiro:pause()
 		return
 	end
 	local forcaX = event.x - bombeiro.x
 	local forcaY = event.y - bombeiro.y
 	bombeiro:setLinearVelocity( forcaX, forcaY )
-	if forcaY < 0 then
-		bombeiro:setSequence("baixo")
+
+	if math.abs(forcaX) > math.abs(forcaY) then
+		if forcaX < 0 then
+			if bombeiro.xScale < 0 and bombeiro.isPlaying and bombeiro.sequence == "andar" then
+				return
+			end
+			bombeiro.xScale = -3
+		else
+			if bombeiro.xScale > 0 and bombeiro.isPlaying and bombeiro.sequence == "andar" then
+				return
+			end
+			bombeiro.xScale = 3
+		end
+		bombeiro:setSequence("andar")
 	else
-		bombeiro:setSequence("cima")
+		if forcaY < 0 then
+			if bombeiro.isPlaying and bombeiro.sequence == "baixo" then
+				return
+			end
+			bombeiro:setSequence("baixo")
+		else
+			if bombeiro.isPlaying and bombeiro.sequence == "cima" then
+				return
+			end
+			bombeiro:setSequence("cima")
+		end
 	end
+	bombeiro:play()
 end
 Runtime:addEventListener("touch", walk)
 function scene:hide( event )
