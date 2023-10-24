@@ -54,7 +54,7 @@ function scene:create( event )
 	local groupTrees = display.newGroup()
 	groupTrees.anchorX = 0
 	groupTrees.anchorY = 0
-	for i = 0, 50 do
+	for i = 0, 20 do
 		trees[i] = display.newImageRect( groupTrees, "recursos/objetos/arvore1.png", 90, 90 )
 		trees[i].x, trees[i].y = unpack(randomCoordinate());
 		physics.addBody( trees[i], "static" )
@@ -94,8 +94,8 @@ bombeiro.x = display.contentCenterX
 bombeiro.y = display.contentCenterY
 bombeiro:scale(3,3);
 physics.addBody( bombeiro, "kinematic", {
-	box = {x = 2, y = 0, halfWidth = 70, halfHeight = 150}, name = "bombeiro"
-}, { radius = 100, name = "mangueira", isSensor=true } )
+	box = {x = 2, y = 0, halfWidth = 70, halfHeight = 150}, myName = "bombeiro"
+}, { radius = 100, myName = "mangueira", isSensor=true } )
 bombeiro.id = "bombeiroID"
 bombeiro.direcao = "andar"
 bombeiro.isFixedRotation = true
@@ -122,9 +122,22 @@ end
 function spawnFire()
 	for i = 0, 5 do
 		fires[i] = display.newImageRect( groupFires, "crate.png", 30, 30 )
-		fires[i].x, fires[i].y = trees[i+10].x, trees[i+10].y;
+		fires[i].x, fires[i].y = trees[i].x, trees[i].y;
 		physics.addBody( fires[i], "static" )
 	end
+end
+
+function onGlobalCollision( event )
+	-- if ( event.phase == "began" ) then
+	-- 	-- if event.object1 == bombeiro or event.object2 == bombeiro then
+	-- 	-- 	playFireAudio()
+	-- 	-- else
+	-- 	-- 	playExplosaoAudio()
+	-- 	-- end
+	-- end
+
+	event.object1:removeSelf()
+	event.object2:removeSelf()
 end
 
 function walk( event )
@@ -167,6 +180,7 @@ function walk( event )
 	bombeiro:play()
 end
 Runtime:addEventListener("touch", walk)
+Runtime:addEventListener( "collision", onGlobalCollision )
 -- Runtime:add
 function scene:hide( event )
 	local sceneGroup = self.view
