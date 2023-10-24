@@ -7,3 +7,16 @@
     align-items: center; 
     
 }
+
+.inicio_frase{
+    color: var(--cor_secundaria);
+    font-size: 100px;
+    line-height: 110px;
+    text-align: justify
+    
+
+}
+
+.inicio_frase span{
+    color: var(--cor_principal);
+}
