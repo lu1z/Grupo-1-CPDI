@@ -1,0 +1,18 @@
+header{
+    width: 100%;
+    height: 10vh;
+    background-color: gray;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.header_logo h1{
+    margin-left: 50px;
+}
+
+.header_links a{
+    color: darkolivegreen;
+    font-size: 20px;
+    margin-right: 50px;
+}
