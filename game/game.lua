@@ -17,6 +17,8 @@ local screenW, screenH, halfW = display.actualContentWidth, display.actualConten
 
 local x = display.contentWidth
 local y = display.contentHeight
+local meioX = display.contentCenterX
+local meioY = display.contentCenterY
 
 function scene:create( event )
 
@@ -51,7 +53,7 @@ function scene:create( event )
 	groupTrees.anchorX = 0
 	groupTrees.anchorY = 0
 	for i = 0, 50 do
-		trees[i] = display.newImageRect( groupTrees, "crate.png", 90, 90 )
+		trees[i] = display.newImageRect( groupTrees, "recursos/objetos/arvore1.png", 90, 90 )
 		trees[i].x, trees[i].y = unpack(randomCoordinate());
 		physics.addBody( trees[i], "static" )
 	end
@@ -82,7 +84,7 @@ end
 
 -- LEITURA INICIAL DA SPRITE SHEET PERSONAGEM
 
-local spriteBombeiro = graphics.newImageSheet( "recursos/personagem/bombeiro.png", {
+local spriteBombeiro = graphics.newImageSheet( "/recursos/personagem/bombeiro.png", {
 	width = 156/3,
 	height = 156/3,
 	numFrames = 9,
@@ -95,8 +97,8 @@ local spriteBombeiro = graphics.newImageSheet( "recursos/personagem/bombeiro.png
 local animacao = {
 	{name = "parado", start = 1, count = 1},
 	{name = "andar", start = 2, count = 4, time = 450, loopCount = 0},
-	{name = "cima", start = 6, count = 2, time = 60},
-	{name = "baixo", start = 8, count = 2, time = 60}
+	{name = "cima", start = 6, count = 2, time = 400, loopCount= 0 },
+	{name = "baixo", start = 8, count = 2, time = 400, loopCount = 0}
 }
 
 -- ADICIONANDO CORPO JOGADOR
