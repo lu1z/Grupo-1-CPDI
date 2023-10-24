@@ -20,6 +20,12 @@ local y = display.contentHeight
 local meioX = display.contentCenterX
 local meioY = display.contentCenterY
 
+local trees = {}
+local fires = {}
+local groupFires = display.newGroup()
+groupFires.anchorX = 0
+groupFires.anchorY = 0
+
 function scene:create( event )
 
 	-- Called when the scene's view does not exist.
@@ -47,8 +53,6 @@ function scene:create( event )
 	local green = { 0, 0.5, 0, 1 }
 	background:setFillColor( unpack(green) )
 	
-	-- make a crate (off-screen), position it, and rotate slightly
-	local trees = {}
 	local groupTrees = display.newGroup()
 	groupTrees.anchorX = 0
 	groupTrees.anchorY = 0
@@ -58,28 +62,10 @@ function scene:create( event )
 		physics.addBody( trees[i], "static" )
 	end
 
-	-- local tree = display.newImageRect( "crate.png", 90, 90 )
-	-- tree.x, tree.y = display.contentCenterX, display.contentCenterY
-	-- tree.rotation = 15
-	
-	-- add physics to the crate
-	-- physics.addBody( tree, "static" )
-	
-	-- create a grass object and add physics (with custom shape)
-	local grass = display.newImageRect( "grass.png", screenW, 82 )
-	grass.anchorX = 0
-	grass.anchorY = 1
-	--  draw the grass at the very bottom of the screen
-	grass.x, grass.y = display.screenOriginX, display.actualContentHeight + display.screenOriginY
-	
-	-- define a shape that's slightly shorter than image bounds (set draw mode to "hybrid" or "debug" to see)
-	local grassShape = { -halfW,-34, halfW,-34, halfW,34, -halfW,34 }
-	physics.addBody( grass, "static", { friction=0.3, shape=grassShape } )
-	
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
-	sceneGroup:insert( grass)
 	sceneGroup:insert( groupTrees )
+	sceneGroup:insert( groupFires )
 end
 
 -- LEITURA INICIAL DA SPRITE SHEET PERSONAGEM
@@ -97,7 +83,7 @@ local spriteBombeiro = graphics.newImageSheet( "/recursos/personagem/bombeiro.pn
 local animacao = {
 	{name = "parado", start = 1, count = 1},
 	{name = "andar", start = 2, count = 4, time = 450, loopCount = 0},
-	{name = "cima", start = 6, count = 2, time = 400, loopCount= 0 },
+	{name = "cima", start = 6, count = 2, time = 400, loopCount = 0 },
 	{name = "baixo", start = 8, count = 2, time = 400, loopCount = 0}
 }
 
@@ -105,13 +91,12 @@ local animacao = {
 
 physics.start()
 
-
 local bombeiro = display.newSprite( spriteBombeiro, animacao )
 bombeiro.x = display.contentCenterX
 bombeiro.y = display.contentCenterY
 bombeiro:scale(3,3);
 physics.addBody( bombeiro, "kinematic", {
-	box = {x = 2, y = 0, halfWidth = 7, halfHeight = 15}
+	box = {x = 2, y = 0, halfWidth = 70, halfHeight = 150}
 } )
 bombeiro.id = "bombeiroID"
 bombeiro.direcao = "andar"
@@ -132,6 +117,15 @@ function scene:show( event )
 		-- INSERT code here to make the scene come alive
 		-- e.g. start timers, begin animation, play audio, etc.
 		physics.start()
+		spawnFire()
+	end
+end
+
+function spawnFire()
+	for i = 0, 5 do
+		fires[i] = display.newImageRect( groupFires, "crate.png", 30, 30 )
+		fires[i].x, fires[i].y = trees[i+10].x, trees[i+10].y;
+		physics.addBody( fires[i], "static" )
 	end
 end
 
@@ -175,6 +169,7 @@ function walk( event )
 	bombeiro:play()
 end
 Runtime:addEventListener("touch", walk)
+-- Runtime:add
 function scene:hide( event )
 	local sceneGroup = self.view
 	
