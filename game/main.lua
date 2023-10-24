@@ -16,17 +16,6 @@ composer.gotoScene( "game" )
 local fireSound = audio.loadSound( "mixkit-big-fire-flame-burning-1331.mp3" )
 local explosionSound = audio.loadSound( "explosion.mp3" )
 local bossAudio = audio.loadSound("")
-local bombeiroAudio = audio.loadSound("")
-
--- Function to play firefighter audio
-
-local function playBombeiroAudio()
-    audio.play(bombeiroAudio)
-
-    audio.play(bombeiro)
-
-    audio.play(bom)
-end
 
 -- Function to play fire audio
 
