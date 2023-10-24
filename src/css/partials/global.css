@@ -1,5 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@300;600&display=swap');
+
 *{
     padding: 0;
     margin: 0;
     text-decoration: none;
+    font-family: 'Blinker', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, label, button{
+    font-weight: 300;
+}
+
+p, input, textarea{
+    font-weight: 600;
 }
