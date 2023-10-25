@@ -1,6 +1,6 @@
 #equipe{
     width: 100%;
-    padding: 4%;
+    
     background-color: var(--cor_fundo);
 }
 
@@ -13,15 +13,14 @@
 
 .equipe_blocos{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;  
+    justify-content: space-evenly;
+     
 }
 
 .equipe_blocos div{  
     display: flex;
-    justify-content: center;
     align-items: center;
-    position: relative;
+    flex-direction: column; 
 }
 
 .equipe_blocos img{
@@ -31,6 +30,8 @@
     height: auto;
 }
 
-.equipe_blocos p a{
-    flex-direction: column;
+.equipe_blocos div a{
+    flex-direction: row;
 }
+
+
