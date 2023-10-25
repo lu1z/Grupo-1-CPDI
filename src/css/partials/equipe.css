@@ -14,12 +14,14 @@
     display: flex;
     justify-content: space-evenly;
     padding-top: 4%;
-     
 }
 
-.equipe_blocos div{  
-    display: inline-block;
-    flex-direction: column; 
+.equipe_blocos div{
+    display: flex;
+    /* display: inline-block; */
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
 }
 
 .equipe_blocos div img{
@@ -32,18 +34,28 @@
 .equipe_blocos div p{
     font-size: 25px;
     color: var(--cor_secundaria);
+    text-align: center;
+    /* align-items: center; */
 }
 
-.equipe_blocos div a {
+.equipe_blocos div div{
+    display: flex;
+    flex-direction: row;
+    /* position: relative;   */
+    justify-content: space-around;
+    
+}
+
+.equipe_blocos div div a {
     font-size: 30px;
     color: var(--cor_principal);
-    position: relative;  
-    justify-content: space-between;
+    /* position: relative;   */
+    /* justify-content: space-between; */
     
 }
 
 .blocos_icone{
-    align-items: center;
+    /* align-items: center; */
 }
 
 
