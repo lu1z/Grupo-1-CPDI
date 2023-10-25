@@ -1,5 +1,36 @@
 #equipe{
     width: 100%;
-    height: 100vh;
+    padding: 4%;
     background-color: var(--cor_fundo);
+}
+
+#equipe h1{
+    color: var(--cor_principal);
+    font-size: 100px;
+    text-align: center;
+    padding-top: 2%;
+}
+
+.equipe_blocos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;  
+}
+
+.equipe_blocos div{  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.equipe_blocos img{
+    max-width: 300px;
+    max-height: 300px;
+    width: auto;
+    height: auto;
+}
+
+.equipe_blocos p a{
+    flex-direction: column;
 }

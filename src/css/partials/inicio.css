@@ -5,7 +5,6 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center; 
-    
 }
 
 .inicio_frase{
@@ -13,8 +12,6 @@
     font-size: 100px;
     line-height: 110px;
     text-align: justify
-    
-
 }
 
 .inicio_frase span{
