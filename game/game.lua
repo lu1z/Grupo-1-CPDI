@@ -51,6 +51,7 @@ function scene:create( event )
 	for i = 0, 20 do
 		trees[i] = display.newImageRect( groupTrees, "recursos/objetos/arvore1.png", 90, 90 )
 		trees[i].x, trees[i].y = unpack(randomCoordinate());
+		trees.isBurned = false
 		physics.addBody( trees[i], "static" )
 	end
 
@@ -89,6 +90,21 @@ function scene:create( event )
 	bombeiro:setSequence("parado")
 	bombeiro:play()
 
+	function burnTrees()
+		-- local queimada
+		-- for key,value in ipairs(fires) do
+		-- 	if value.myName == "fire" then
+		-- 		value:removeSelf()
+		-- 		queimada = display.newImageRect( groupTrees, "recursos/objetos/arvore2", 90, 90 )
+		-- 		queimada.x, queimada.y = trees[key].x, trees[key].y
+		-- 		queimada.isBurned = true
+		-- 		-- trees[i]:removeSelf()
+		-- 		-- trees[i] = queimada
+		-- 		physics.addBody( queimada, "static" )
+		-- 	end
+		-- end
+	end
+
 	function spawnFire()
 		for i = 0, 5 do
 			fires[i] = display.newImageRect( groupFires, "crate.png", 30, 30 )
@@ -97,6 +113,7 @@ function scene:create( event )
 			fires[i].idx = i
 			physics.addBody( fires[i], "static" )
 		end
+		timer.performWithDelay( 15000, burnTrees, 1 )
 	end
 	
 	function onGlobalCollision( event )
