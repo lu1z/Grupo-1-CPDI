@@ -11,3 +11,26 @@
     padding-top: 2%;
 }
 
+.equipe_blocos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;  
+}
+
+.equipe_blocos div{  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.equipe_blocos img{
+    max-width: 300px;
+    max-height: 300px;
+    width: auto;
+    height: auto;
+}
+
+.equipe_blocos p a{
+    flex-direction: column;
+}
