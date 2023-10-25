@@ -13,28 +13,28 @@ local composer = require "composer"
 -- load menu screen
 composer.gotoScene( "game" )
 
-local fireSound = audio.loadSound( "mixkit-big-fire-flame-burning-1331.mp3" )
-local explosionSound = audio.loadSound( "explosion.mp3" )
-local bossAudio = audio.loadSound("")
+-- local fireSound = audio.loadSound( "/audio/mixkit-big-fire-flame-burning-1331.mp3" )
+-- local explosionSound = audio.loadSound( "/audio/mixkit-big-fire-flame-burning-1331.mp3" )
+-- local bossAudio = audio.loadSound("/audio/mixkit-big-fire-flame-burning-1331.mp3")
 
--- Function to play fire audio
+-- -- Function to play fire audio
 
-local function playFireAudio()
-    audio.play(fireAudio)
+-- local function playFireAudio()
+--     audio.play(fireAudio)
 
-    audio.play(fire)
-end
+--     audio.play(fire)
+-- end
 
--- Function to play explosion audio
+-- -- Function to play explosion audio
 
-local function playExplosaoAudio()
-    audio.play(explosaoAudio)
-end
+-- local function playExplosaoAudio()
+--     audio.play(explosaoAudio)
+-- end
 
--- Function to play boss audio
+-- -- Function to play boss audio
 
-local function playBossAudio()
-    audio.play(bossAudio)
+-- local function playBossAudio()
+--     audio.play(bossAudio)
 
-    audio.play(boss)
-end
+--     audio.play(boss)
+-- end
