@@ -1,5 +1,13 @@
 #equipe{
     width: 100%;
-    height: 100vh;
+    padding: 4%;
     background-color: var(--cor_fundo);
 }
+
+#equipe h1{
+    color: var(--cor_principal);
+    font-size: 100px;
+    text-align: center;
+    padding-top: 2%;
+}
+
