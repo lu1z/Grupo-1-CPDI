@@ -3,3 +3,51 @@
     height: 100vh;
     background-color: var(--cor_fundo);
 }
+
+.cpdi_titulo h1 {
+    color: var(--cor_principal);
+    font-size: 100px;
+    text-align: center;
+    padding-top: 6%;
+}
+
+#cpdi h1 span{
+    font-size: 65px;
+}
+
+.cpdi_bloco{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 3% 7% 0 7%;
+
+}
+
+.cpdi_logo img{
+    max-width: 600px;
+    max-height: 600px;
+    box-shadow: 1px 1px 15px 3px var(--cor_header);
+    border-radius: 5%;
+    -webkit-border-radius: 5%;
+    -moz-border-radius: 5%;
+    -ms-border-radius: 5%;
+    -o-border-radius: 5%;
+}
+
+.cpdi_texto{
+    text-align: justify;
+    padding-left: 10%;
+}
+
+.cpdi_texto h1{
+    font-size: 30px;
+    color: var(--cor_principal);
+}
+
+.cpdi_texto p{
+    color: var(--cor_secundaria);
+    font-size: 25px;
+    padding-top: 3%;
+    padding-bottom: 4%;
+}
+

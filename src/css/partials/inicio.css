@@ -11,9 +11,12 @@
     color: var(--cor_secundaria);
     font-size: 100px;
     line-height: 110px;
-    text-align: justify
+    text-align: justify;
+    letter-spacing: 12px;
 }
 
 .inicio_frase span{
     color: var(--cor_principal);
+    letter-spacing: normal;
+    text-shadow: 1px 15px 3px var(--cor_header);
 }
