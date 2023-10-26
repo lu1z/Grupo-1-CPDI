@@ -145,11 +145,7 @@ function scene:create( event )
 		agua.anchorX = 1
 		agua.anchorY = 0.5
 		agua.x, agua.y = bombeiro.x, bombeiro.y
-
-		-- local diffX = math.abs(bombeiro.x - agua.x)
-		-- local diffY = math.abs(bombeiro.y - agua.y)
-		-- local targetAngle = math.atan(diffX / diffY)
-		-- agua.rotation = math.deg(targetAngle)
+		agua.rotation = angleBetweenPoints({ x=obj.x, y=obj.y }, { x=bombeiro.x, y=bombeiro.y })
 
 		timer.performWithDelay( 500, function ()
 			obj:removeSelf()
@@ -161,15 +157,9 @@ function scene:create( event )
 		if ( event.phase == "began" ) then
 			if event.object1.myName == "fire" and event.object2.myName == "bombeiro" then
 				mangueirada(event.object1)
-				-- objectRefs[event.object1.idx].hasFire = false
-				-- objectRefs[event.object1.idx].fireObject = nil
-				-- event.object1:removeSelf()
 			end
 			if event.object2.myName == "fire" and event.object1.myName == "bombeiro" then
 				mangueirada(event.object2)
-				-- objectRefs[event.object2.idx].hasFire = false
-				-- objectRefs[event.object2.idx].fireObject = nil
-				-- event.object2:removeSelf()
 			end
 		end
 	end
