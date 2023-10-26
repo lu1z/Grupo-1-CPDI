@@ -19,8 +19,9 @@
 }
 
 .jogo_download a {
-    background-color: var(--cor_secundaria);
+    background-color: var(--cor_header);
     color: var(--cor_principal);
+    box-shadow: 1px 1px 15px 3px var(--cor_header);
     font-weight: 600;
     font-size: 25px;
     padding: 0.5%;
@@ -33,5 +34,6 @@
 
 .jogo_download :hover{
     background-color: var(--cor_principal);
-    color: var(--cor_secundaria);
+    color: var(--cor_header);
+    
 }
