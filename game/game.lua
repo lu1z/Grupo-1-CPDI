@@ -24,7 +24,11 @@ function scene:create( event )
 	local y = display.contentHeight
 	local meioX = display.contentCenterX
 	local meioY = display.contentCenterY
-	
+
+	local tempoRestante = 120
+
+	local vidas = 10
+
 	-- spawnPoints
 	local objectRefs = {}
 	
@@ -32,6 +36,27 @@ function scene:create( event )
 	local background = display.newImageRect( "recursos/cenario/grama.png", x, y )
 	background.anchorX = 0 
 	background.anchorY = 0
+
+	-- timer
+	local textoTempoRestante = display.newText( {
+		text = tempoRestante,     
+    x = meioX,
+    y = y * 0.1,
+    width = 128,
+    font = native.systemFont,   
+    fontSize = 18,
+    align = "center"  -- Alignment parameter
+	} )
+
+	local textoVidas = display.newText( {
+		text = vidas,     
+    x = meioX,
+    y = y * 0.05,
+    width = 128,
+    font = native.systemFont,   
+    fontSize = 18,
+    align = "center"  -- Alignment parameter
+	} )
 
 	-- grupo dos fogos
 	local groupFires = display.newGroup()
@@ -97,6 +122,10 @@ function scene:create( event )
 	bombeiro:setSequence("parado")
 	bombeiro:play()
 
+	function perdei()
+		-- perde o jogo
+	end
+
 	function burnTrees()
 		for _,value in ipairs(objectRefs) do
 			if value.hasFire then
@@ -110,6 +139,11 @@ function scene:create( event )
 				value.isBurned = true
 				value.treeObject = queimada
 				physics.addBody( queimada, "static" )
+				vidas = vidas - 1
+				textoVidas.text = vidas
+				if vidas <= 0 then
+					perdeu()
+				end
 			end
 		end
 	end
@@ -204,13 +238,29 @@ function scene:create( event )
 		bombeiro:play()
 	end
 
+	function venceu()
+		
+	end
+
+	function decrementaTempo()
+		-- logica de final
+		tempoRestante = tempoRestante - 1
+		textoTempoRestante.text = tempoRestante
+
+		if tempoRestante <= 0 then
+			venceu()
+		end
+	end
+
 	Runtime:addEventListener("touch", walk)
 	Runtime:addEventListener( "collision", onGlobalCollision )
 	timer.performWithDelay( 15000, spawnFire, 0 )
+	timer.performWithDelay( 1000, decrementaTempo, 0 )
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
 	sceneGroup:insert( groupTrees )
 	sceneGroup:insert( groupFires )
+	sceneGroup:insert( textoTempoRestante )
 end
 
 function scene:show( event )
