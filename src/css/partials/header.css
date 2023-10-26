@@ -10,14 +10,17 @@ header{
 
 .header_logo img{
     width: 130px;
-    padding-left: 20%;
+    margin-left: 20px;
+    
 }
 
 .header_links a{
     color: var(--cor_secundaria);
     font-size: 20px;
-    margin-right: 50px;
+    margin-right: 70px ;
+    
 }
 .header_links :hover{
     color: var(--cor_principal);
 }
+

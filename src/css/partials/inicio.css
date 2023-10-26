@@ -7,6 +7,13 @@
     align-items: center; 
 }
 
+@media (max-width:1200px){
+    #inicio{
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
 .inicio_frase{
     color: var(--cor_secundaria);
     font-size: 100px;
@@ -19,4 +26,18 @@
     color: var(--cor_principal);
     letter-spacing: normal;
     text-shadow: 1px 15px 3px var(--cor_header);
+}
+
+@media (max-width:1200px){
+    .inicio_logo
+    {margin-top: 30px;
+        
+    }
+}
+
+@media (max-width:1200px){
+    .inicio_frase{
+        padding-top: 10%;
+        
+    }
 }
