@@ -12,18 +12,12 @@ local physics = require "physics"
 --------------------------------------------
 
 function scene:create( event )
-	-- Called when the scene's view does not exist.
-	-- 
-	-- INSERT code here to initialize the scene
-	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
-
 	local sceneGroup = self.view
 
-	-- We need physics started to add bodies, but we don't want the simulaton
-	-- running until the scene is on the screen.
 	physics.start()
 	physics.setGravity(0,0)
 	-- physics.pause()
+
 	-- Exibição do graficos coloridos para testar o comportamento físico.
 	physics.setDrawMode( "hybrid" )
 	local x = display.contentWidth
@@ -31,28 +25,39 @@ function scene:create( event )
 	local meioX = display.contentCenterX
 	local meioY = display.contentCenterY
 	
-	local trees = {}
-	local fires = {}
+	-- spawnPoints
+	local objectRefs = {}
+	
+	-- background
+	local background = display.newImageRect( "recursos/cenario/grama.png", x, y )
+	background.anchorX = 0 
+	background.anchorY = 0
+
+	-- grupo dos fogos
 	local groupFires = display.newGroup()
 	groupFires.anchorX = 0
 	groupFires.anchorY = 0
 
-	-- create a grey rectangle as the backdrop
-	-- the physical screen will likely be a different shape than our defined content area
-	-- since we are going to position the background from it's top, left corner, draw the
-	-- background at the real top, left corner.
-	local background = display.newImageRect( "recursos/cenario/grama.png", x, y )
-	background.anchorX = 0 
-	background.anchorY = 0
-	
+	-- grupo das arvores
 	local groupTrees = display.newGroup()
 	groupTrees.anchorX = 0
 	groupTrees.anchorY = 0
-	for i = 0, 20 do
-		trees[i] = display.newImageRect( groupTrees, "recursos/objetos/arvore1.png", 90, 90 )
-		trees[i].x, trees[i].y = unpack(randomCoordinate());
-		trees.isBurned = false
-		physics.addBody( trees[i], "static" )
+
+	-- cria as arvores iniciais aleatoriamente e inicializa os objetos com a referencia dos spawns
+	for i = 1, 25 do
+		-- arvre
+		local tree = display.newImageRect( groupTrees, "recursos/objetos/arvore1.png", 90, 90 ) 
+		tree.x, tree.y = unpack(randomCoordinate());
+		physics.addBody( tree, "static" )
+		-- spawPoint
+		objectRefs[i] = {
+			treeObject = tree,
+			fireObject = nil, 
+			isBurned = false,
+			x = tree.x,
+			y = tree.y,
+			hasFire = false,
+		}
 	end
 
 	-- LEITURA INICIAL DA SPRITE SHEET PERSONAGEM
@@ -80,10 +85,12 @@ function scene:create( event )
 	bombeiro.x = display.contentCenterX
 	bombeiro.y = display.contentCenterY
 	bombeiro:scale(3,3);
+	-- corpos de colisao box para o peronagem e circulo para a mangueira
 	physics.addBody( bombeiro, "dynamic", {
-		box = {x = 2, y = 0, halfWidth = 7, halfHeight = 15}, myName = "bombeiro", isSensor=true
-	}, { radius = 100, myName = "mangueira", isSensor=true } )
-	bombeiro.id = "bombeiroID"
+		box = {x = 2, y = 0, halfWidth = 7, halfHeight = 15}, myName = "bombeiro", isSensor=true},
+		{ radius = 100, myName = "mangueira", isSensor=true } 
+  )
+	-- bombeiro.id = "bombeiroID"
 	bombeiro.direcao = "andar"
 	bombeiro.myName = "bombeiro"
 	bombeiro.isFixedRotation = true
@@ -91,43 +98,74 @@ function scene:create( event )
 	bombeiro:play()
 
 	function burnTrees()
-		-- local queimada
-		-- for key,value in ipairs(fires) do
-		-- 	if value.myName == "fire" then
-		-- 		value:removeSelf()
-		-- 		queimada = display.newImageRect( groupTrees, "recursos/objetos/arvore2", 90, 90 )
-		-- 		queimada.x, queimada.y = trees[key].x, trees[key].y
-		-- 		queimada.isBurned = true
-		-- 		-- trees[i]:removeSelf()
-		-- 		-- trees[i] = queimada
-		-- 		physics.addBody( queimada, "static" )
-		-- 	end
-		-- end
+		for _,value in ipairs(objectRefs) do
+			if value.hasFire then
+				value.fireObject:removeSelf()
+				value.fireObject = nil
+				value.hasFire = false
+				value.treeObject:removeSelf()
+				value.treeObject = nil
+				local queimada = display.newImageRect( groupTrees, "recursos/objetos/arvore2.png", 90, 90 )
+				queimada.x, queimada.y = value.x, value.y
+				value.isBurned = true
+				value.treeObject = queimada
+				physics.addBody( queimada, "static" )
+			end
+		end
 	end
 
 	function spawnFire()
-		for i = 0, 5 do
-			fires[i] = display.newImageRect( groupFires, "crate.png", 30, 30 )
-			fires[i].x, fires[i].y = trees[i].x, trees[i].y;
-			fires[i].myName = "fire"
-			fires[i].idx = i
-			physics.addBody( fires[i], "static" )
+		for i = 1, 5 do
+			local spot = findSpot(objectRefs)
+			if spot == nil then
+				timer.performWithDelay( 14000, burnTrees, 1 )
+				return
+			end
+			local fire = display.newImageRect( groupFires, "crate.png", 30, 30 )
+			fire.x, fire.y = objectRefs[spot].x, objectRefs[spot].y;
+			fire.myName = "fire"
+			fire.idx = spot
+			physics.addBody( fire, "static" )
+			objectRefs[spot].hasFire = true
+			objectRefs[spot].fireObject = fire
 		end
-		timer.performWithDelay( 15000, burnTrees, 1 )
+		timer.performWithDelay( 14000, burnTrees, 1 )
 	end
 	
+	function mangueirada(obj)
+		-- taca agua
+		local agua = display.newImageRect( groupFires, "crate.png", 100, 10 )
+		agua.anchorX = 1 
+		agua.anchorY = 0.5
+		agua.x, agua.y = bombeiro.x, bombeiro.y
+		-- local diffX = math.abs(bombeiro.x - agua.x)
+		-- local diffY = math.abs(bombeiro.y - agua.y)
+		-- local targetAngle = math.atan(diffX / diffY) 
+		-- agua.rotation = math.deg(targetAngle)
+
+		timer.performWithDelay( 500, function ()
+			objectRefs[obj.idx].hasFire = false
+			objectRefs[obj.idx].fireObject = nil
+			obj:removeSelf()
+			agua:removeSelf()
+		end, 1 )
+	end
+
 	function onGlobalCollision( event )
 		if ( event.phase == "began" ) then
 			if event.object1.myName == "fire" and event.object2.myName == "bombeiro" then
-				-- fires[event.object1.idx]:removeSelf()
-				event.object1:removeSelf()
+				mangueirada(event.object1)
+				-- objectRefs[event.object1.idx].hasFire = false
+				-- objectRefs[event.object1.idx].fireObject = nil
+				-- event.object1:removeSelf()
 			end
 			if event.object2.myName == "fire" and event.object1.myName == "bombeiro" then
-				-- fires[event.object2.idx]:removeSelf()
-				event.object2:removeSelf()
+				mangueirada(event.object2)
+				-- objectRefs[event.object2.idx].hasFire = false
+				-- objectRefs[event.object2.idx].fireObject = nil
+				-- event.object2:removeSelf()
 			end
 		end
-	
 	end
 	
 	function walk( event )
@@ -169,6 +207,7 @@ function scene:create( event )
 		end
 		bombeiro:play()
 	end
+
 	Runtime:addEventListener("touch", walk)
 	Runtime:addEventListener( "collision", onGlobalCollision )
 	timer.performWithDelay( 15000, spawnFire, 0 )
@@ -190,7 +229,7 @@ function scene:show( event )
 		-- INSERT code here to make the scene come alive
 		-- e.g. start timers, begin animation, play audio, etc.
 		physics.start()
-		spawnFire()
+		-- spawnFire()
 	end
 end
 
