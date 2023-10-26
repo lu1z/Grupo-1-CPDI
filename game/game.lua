@@ -134,18 +134,24 @@ function scene:create( event )
 	
 	function mangueirada(obj)
 		-- taca agua
+		if not objectRefs[obj.idx].hasFire then
+			return
+		end
+
+		objectRefs[obj.idx].hasFire = false
+		objectRefs[obj.idx].fireObject = nil
+
 		local agua = display.newImageRect( groupFires, "crate.png", 100, 10 )
-		agua.anchorX = 1 
+		agua.anchorX = 1
 		agua.anchorY = 0.5
 		agua.x, agua.y = bombeiro.x, bombeiro.y
+
 		-- local diffX = math.abs(bombeiro.x - agua.x)
 		-- local diffY = math.abs(bombeiro.y - agua.y)
-		-- local targetAngle = math.atan(diffX / diffY) 
+		-- local targetAngle = math.atan(diffX / diffY)
 		-- agua.rotation = math.deg(targetAngle)
 
 		timer.performWithDelay( 500, function ()
-			objectRefs[obj.idx].hasFire = false
-			objectRefs[obj.idx].fireObject = nil
 			obj:removeSelf()
 			agua:removeSelf()
 		end, 1 )
