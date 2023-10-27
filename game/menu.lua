@@ -27,23 +27,35 @@ end
 function scene:create( event )
 	local sceneGroup = self.view
 
+	local x = display.contentWidth
+	local y = display.contentHeight
+	local meioX = display.contentCenterX
+	local meioY = display.contentCenterY
+
 	-- Called when the scene's view does not exist.
 	-- 
 	-- INSERT code here to initialize the scene
 	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
 
-	-- display a background image
-	local background = display.newImageRect( "background.jpg", display.actualContentWidth, display.actualContentHeight )
-	background.anchorX = 0
-	background.anchorY = 0
-	background.x = 0 + display.screenOriginX 
-	background.y = 0 + display.screenOriginY
+	-- display para cor do fundo
+	local fundo = display.newRect( sceneGroup, x*0.5, y*0.5, x, y )
+	fundo:setFillColor (0.247, 0.247, 0.247)
+
+	-- Criação do logo/nome do jogo
+	local logo = display.newImageRect( sceneGroup, "/recursos/background/logo.png", x*0.3, x*0.3 )
+	logo.x = meioX
+	logo.y = y*0.4
+
+	-- display composição background - faisca
+	local background = display.newImageRect( sceneGroup,"/recursos/background/faisca.png", x, y )
+	background.x = x*0.5
+	background.y = y*0.5
 	
-	-- create/position logo/title image on upper-half of the screen
-	local titleLogo = display.newImageRect( "logo.png", 264, 42 )
-	titleLogo.x = display.contentCenterX
-	titleLogo.y = 100
-	
+	-- display composição background - Fumaça
+	local fumaca = display.newImageRect( sceneGroup, "/recursos/background/fumaca.png", x, y )
+	fumaca.x= meioX
+	fumaca.y= y*0.65
+
 	-- create a widget button (which will loads level1.lua on release)
 	playBtn = widget.newButton{
 		label = "Play Now",
@@ -57,8 +69,11 @@ function scene:create( event )
 	playBtn.y = display.contentHeight - 125
 	
 	-- all display objects must be inserted into group
+	
+	sceneGroup:insert( fundo )
+	sceneGroup:insert( logo )
 	sceneGroup:insert( background )
-	sceneGroup:insert( titleLogo )
+	sceneGroup:insert( fumaca )
 	sceneGroup:insert( playBtn )
 end
 
