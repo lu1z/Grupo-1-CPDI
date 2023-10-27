@@ -123,7 +123,16 @@ function scene:create( event )
 	bombeiro:play()
 
 	function perdeu()
-		-- perde o jogo
+		sceneGroup:insert( display.newText( {
+			text = "Perdeu!!!",     
+			x = meioX,
+			y = meioY,
+			width = 512,
+			font = native.systemFont,   
+			fontSize = 60,
+			align = "center"  -- Alignment parameter
+		} ) )
+		composer.gotoScene( "menu", "fade", 2000 )
 	end
 
 	function burnTrees()
@@ -239,7 +248,16 @@ function scene:create( event )
 	end
 
 	function venceu()
-		
+		sceneGroup:insert( display.newText( {
+			text = "Venceu!!!",     
+			x = meioX,
+			y = meioY,
+			width = 512,
+			font = native.systemFont,   
+			fontSize = 60,
+			align = "center"  -- Alignment parameter
+		} ) )
+		composer.gotoScene( "menu", "fade", 2000 )
 	end
 
 	function decrementaTempo()
@@ -303,7 +321,6 @@ function scene:destroy( event )
 	-- INSERT code here to cleanup the scene
 	-- e.g. remove display objects, remove touch listeners, save state, etc.
 	local sceneGroup = self.view
-	
 	package.loaded[physics] = nil
 	physics = nil
 end
