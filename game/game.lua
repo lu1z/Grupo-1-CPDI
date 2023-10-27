@@ -16,7 +16,7 @@ function scene:create( event )
 
 	physics.start()
 	physics.setGravity(0,0)
-	-- physics.pause()
+	physics.pause()
 
 	-- Exibição do graficos coloridos para testar o comportamento físico.
 	physics.setDrawMode( "hybrid" )
@@ -31,10 +31,10 @@ function scene:create( event )
 
 	-- spawnPoints
 	local objectRefs = {}
-	
+
 	-- background
 	local background = display.newImageRect( "recursos/cenario/grama.png", x, y )
-	background.anchorX = 0 
+	background.anchorX = 0
 	background.anchorY = 0
 
 	-- timer
@@ -122,7 +122,7 @@ function scene:create( event )
 	bombeiro:setSequence("parado")
 	bombeiro:play()
 
-	function perdeu()
+	local function perdeu()
 		sceneGroup:insert( display.newText( {
 			text = "Perdeu!!!",     
 			x = meioX,
@@ -132,15 +132,11 @@ function scene:create( event )
 			fontSize = 60,
 			align = "center"  -- Alignment parameter
 		} ) )
-		Runtime:removeEventListener( "touch", walk )
-		Runtime:removeEventListener( "collision", onGlobalCollision )
-		timer.performWithDelay( 3000, function ()
-			composer.removeScene( "game" )
-		end, 1 )
+		cleanup()
 		composer.gotoScene( "menu", "fade", 2000 )
 	end
 
-	function burnTrees()
+	local function burnTrees()
 		for _,value in ipairs(objectRefs) do
 			if value.hasFire then
 				value.fireObject:removeSelf()
@@ -162,7 +158,7 @@ function scene:create( event )
 		end
 	end
 
-	function spawnFire()
+	local function spawnFire()
 		for i = 1, 5 do
 			local spot = findSpot(objectRefs)
 			if spot == nil then
@@ -180,7 +176,7 @@ function scene:create( event )
 		timer.performWithDelay( 14000, burnTrees, 1 )
 	end
 	
-	function mangueirada(obj)
+	local function mangueirada(obj)
 		-- taca agua
 		if not objectRefs[obj.idx].hasFire then
 			return
@@ -201,7 +197,7 @@ function scene:create( event )
 		end, 1 )
 	end
 
-	function onGlobalCollision( event )
+	local function onGlobalCollision( event )
 		if ( event.phase == "began" ) then
 			if event.object1.myName == "fire" and event.object2.myName == "bombeiro" then
 				mangueirada(event.object1)
@@ -212,7 +208,7 @@ function scene:create( event )
 		end
 	end
 	
-	function walk( event )
+	local function walk( event )
 		if event.phase == "ended" then
 			bombeiro:setLinearVelocity( 0, 0 )
 			bombeiro:setSequence("parado")
@@ -252,7 +248,7 @@ function scene:create( event )
 		bombeiro:play()
 	end
 
-	function venceu()
+	local function venceu()
 		sceneGroup:insert( display.newText( {
 			text = "Venceu!!!",     
 			x = meioX,
@@ -262,15 +258,11 @@ function scene:create( event )
 			fontSize = 60,
 			align = "center"  -- Alignment parameter
 		} ) )
-		Runtime:removeEventListener( "touch", walk )
-		Runtime:removeEventListener( "collision", onGlobalCollision )
-		timer.performWithDelay( 3000, function ()
-			composer.removeScene( "game" )
-		end, 1 )
+		cleanup()
 		composer.gotoScene( "menu", "fade", 2000 )
 	end
 
-	function decrementaTempo()
+	local function decrementaTempo()
 		-- logica de final
 		tempoRestante = tempoRestante - 1
 		textoTempoRestante.text = tempoRestante
@@ -282,8 +274,25 @@ function scene:create( event )
 
 	Runtime:addEventListener("touch", walk)
 	Runtime:addEventListener( "collision", onGlobalCollision )
-	timer.performWithDelay( 15000, spawnFire, 0 )
-	timer.performWithDelay( 1000, decrementaTempo, 0 )
+	local spawner = timer.performWithDelay( 15000, spawnFire, 0 )
+	local counter = timer.performWithDelay( 1000, decrementaTempo, 0 )
+
+	function cleanup()
+		Runtime:removeEventListener( "touch", walk )
+		Runtime:removeEventListener( "collision", onGlobalCollision )
+		timer.cancel(spawner)
+		timer.cancel(counter)
+
+		-- local tempoRestante = 120
+
+		-- local vidas = 10
+	
+		-- -- spawnPoints
+		objectRefs = nil
+
+		composer.removeScene( "game" )
+	end
+
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
 	sceneGroup:insert( groupTrees )
