@@ -13,6 +13,12 @@
     }
 }
 
+@media(min-width:1200px) {
+    #inicio{
+        height: 100vh;
+    }
+}
+
 .inicio_frase{
     color: var(--cor_secundaria);
     font-size: 100px;
@@ -46,9 +52,13 @@
 
 @media (max-width:1200px){
     .inicio_frase{
-        padding-top: 30%;
+        padding-top: 20%;
         
     }
+}
+
+@media(max-width:800px){
+
 }
 
 @media (max-width:480px){
