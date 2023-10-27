@@ -132,6 +132,8 @@ function scene:create( event )
 			fontSize = 60,
 			align = "center"  -- Alignment parameter
 		} ) )
+		Runtime:removeEventListener( "touch", walk )
+		Runtime:removeEventListener( "collision", onGlobalCollision )
 		composer.gotoScene( "menu", "fade", 2000 )
 	end
 
@@ -257,6 +259,8 @@ function scene:create( event )
 			fontSize = 60,
 			align = "center"  -- Alignment parameter
 		} ) )
+		Runtime:removeEventListener( "touch", walk )
+		Runtime:removeEventListener( "collision", onGlobalCollision )
 		composer.gotoScene( "menu", "fade", 2000 )
 	end
 
@@ -279,6 +283,8 @@ function scene:create( event )
 	sceneGroup:insert( groupTrees )
 	sceneGroup:insert( groupFires )
 	sceneGroup:insert( textoTempoRestante )
+	sceneGroup:insert( textoVidas )
+	sceneGroup:insert( bombeiro )
 end
 
 function scene:show( event )
