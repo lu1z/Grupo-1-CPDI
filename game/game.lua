@@ -24,7 +24,11 @@ function scene:create( event )
 	local y = display.contentHeight
 	local meioX = display.contentCenterX
 	local meioY = display.contentCenterY
-	
+
+	local tempoRestante = 120
+
+	local vidas = 10
+
 	-- spawnPoints
 	local objectRefs = {}
 	
@@ -32,6 +36,27 @@ function scene:create( event )
 	local background = display.newImageRect( "recursos/cenario/grama.png", x, y )
 	background.anchorX = 0 
 	background.anchorY = 0
+
+	-- timer
+	local textoTempoRestante = display.newText( {
+		text = tempoRestante,     
+    x = meioX,
+    y = y * 0.1,
+    width = 128,
+    font = native.systemFont,   
+    fontSize = 18,
+    align = "center"  -- Alignment parameter
+	} )
+
+	local textoVidas = display.newText( {
+		text = vidas,     
+    x = meioX,
+    y = y * 0.05,
+    width = 128,
+    font = native.systemFont,   
+    fontSize = 18,
+    align = "center"  -- Alignment parameter
+	} )
 
 	-- grupo dos fogos
 	local groupFires = display.newGroup()
@@ -97,6 +122,19 @@ function scene:create( event )
 	bombeiro:setSequence("parado")
 	bombeiro:play()
 
+	function perdeu()
+		sceneGroup:insert( display.newText( {
+			text = "Perdeu!!!",     
+			x = meioX,
+			y = meioY,
+			width = 512,
+			font = native.systemFont,   
+			fontSize = 60,
+			align = "center"  -- Alignment parameter
+		} ) )
+		composer.gotoScene( "menu", "fade", 2000 )
+	end
+
 	function burnTrees()
 		for _,value in ipairs(objectRefs) do
 			if value.hasFire then
@@ -110,6 +148,11 @@ function scene:create( event )
 				value.isBurned = true
 				value.treeObject = queimada
 				physics.addBody( queimada, "static" )
+				vidas = vidas - 1
+				textoVidas.text = vidas
+				if vidas <= 0 then
+					perdeu()
+				end
 			end
 		end
 	end
@@ -145,11 +188,7 @@ function scene:create( event )
 		agua.anchorX = 1
 		agua.anchorY = 0.5
 		agua.x, agua.y = bombeiro.x, bombeiro.y
-
-		-- local diffX = math.abs(bombeiro.x - agua.x)
-		-- local diffY = math.abs(bombeiro.y - agua.y)
-		-- local targetAngle = math.atan(diffX / diffY)
-		-- agua.rotation = math.deg(targetAngle)
+		agua.rotation = angleBetweenPoints({ x=obj.x, y=obj.y }, { x=bombeiro.x, y=bombeiro.y })
 
 		timer.performWithDelay( 500, function ()
 			obj:removeSelf()
@@ -161,15 +200,9 @@ function scene:create( event )
 		if ( event.phase == "began" ) then
 			if event.object1.myName == "fire" and event.object2.myName == "bombeiro" then
 				mangueirada(event.object1)
-				-- objectRefs[event.object1.idx].hasFire = false
-				-- objectRefs[event.object1.idx].fireObject = nil
-				-- event.object1:removeSelf()
 			end
 			if event.object2.myName == "fire" and event.object1.myName == "bombeiro" then
 				mangueirada(event.object2)
-				-- objectRefs[event.object2.idx].hasFire = false
-				-- objectRefs[event.object2.idx].fireObject = nil
-				-- event.object2:removeSelf()
 			end
 		end
 	end
@@ -214,13 +247,38 @@ function scene:create( event )
 		bombeiro:play()
 	end
 
+	function venceu()
+		sceneGroup:insert( display.newText( {
+			text = "Venceu!!!",     
+			x = meioX,
+			y = meioY,
+			width = 512,
+			font = native.systemFont,   
+			fontSize = 60,
+			align = "center"  -- Alignment parameter
+		} ) )
+		composer.gotoScene( "menu", "fade", 2000 )
+	end
+
+	function decrementaTempo()
+		-- logica de final
+		tempoRestante = tempoRestante - 1
+		textoTempoRestante.text = tempoRestante
+
+		if tempoRestante <= 0 then
+			venceu()
+		end
+	end
+
 	Runtime:addEventListener("touch", walk)
 	Runtime:addEventListener( "collision", onGlobalCollision )
 	timer.performWithDelay( 15000, spawnFire, 0 )
+	timer.performWithDelay( 1000, decrementaTempo, 0 )
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
 	sceneGroup:insert( groupTrees )
 	sceneGroup:insert( groupFires )
+	sceneGroup:insert( textoTempoRestante )
 end
 
 function scene:show( event )
@@ -263,7 +321,6 @@ function scene:destroy( event )
 	-- INSERT code here to cleanup the scene
 	-- e.g. remove display objects, remove touch listeners, save state, etc.
 	local sceneGroup = self.view
-	
 	package.loaded[physics] = nil
 	physics = nil
 end
