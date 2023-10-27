@@ -1,5 +1,5 @@
 function randomCoordinate()
-  return { math.random(0, display.contentWidth), math.random(0, display.contentHeight) };
+  return { math.random(45, display.contentWidth - 45), math.random(45, display.contentHeight - 45) };
 end
 
 function findSpot(refs)

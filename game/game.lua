@@ -122,7 +122,7 @@ function scene:create( event )
 	bombeiro:setSequence("parado")
 	bombeiro:play()
 
-	function perdei()
+	function perdeu()
 		-- perde o jogo
 	end
 
