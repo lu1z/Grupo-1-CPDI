@@ -58,11 +58,10 @@ function scene:create( event )
 
 	-- create a widget button (which will loads level1.lua on release)
 	playBtn = widget.newButton{
-		label = "Play Now",
 		labelColor = { default={ 1.0 }, over={ 0.5 } },
-		defaultFile = "button.png",
-		overFile = "button-over.png",
-		width = 154, height = 40,
+		defaultFile = "/recursos/botao/playum.png",
+		overFile = "/recursos/botao/playdois.png",
+		width = 250, height = 80,
 		onRelease = onPlayBtnRelease	-- event listener function
 	}
 	playBtn.x = display.contentCenterX
