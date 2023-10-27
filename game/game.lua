@@ -152,7 +152,7 @@ function scene:create( event )
 				vidas = vidas - 1
 				textoVidas.text = vidas
 				if vidas <= 0 then
-					perdeu()
+					return perdeu()
 				end
 			end
 		end
