@@ -10,6 +10,11 @@
     padding-top: 6%;
 }
 
+@media (max-width:480px){
+    #equipe h1{
+        font-size: 65px;}
+}
+
 .equipe_blocos{
     display: flex;
     justify-content: space-evenly;
@@ -19,6 +24,13 @@
 .equipe_blocos div{
     display: flex;
     flex-direction: column;
+}
+
+@media(max-width:800px){
+    .equipe_blocos{
+        flex-wrap: wrap;
+        
+    }
 }
 
 .equipe_blocos div img{
@@ -32,6 +44,12 @@
     -moz-border-radius: 5%;
     -ms-border-radius: 5%;
     -o-border-radius: 5%;
+}
+
+@media(max-width:800px){
+    .equipe_blocos div img{
+        margin-top: 10%;
+    }
 }
 
 .equipe_blocos div p{
