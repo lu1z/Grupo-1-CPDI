@@ -134,6 +134,9 @@ function scene:create( event )
 		} ) )
 		Runtime:removeEventListener( "touch", walk )
 		Runtime:removeEventListener( "collision", onGlobalCollision )
+		timer.performWithDelay( 3000, function ()
+			composer.removeScene( "game" )
+		end, 1 )
 		composer.gotoScene( "menu", "fade", 2000 )
 	end
 
@@ -261,6 +264,9 @@ function scene:create( event )
 		} ) )
 		Runtime:removeEventListener( "touch", walk )
 		Runtime:removeEventListener( "collision", onGlobalCollision )
+		timer.performWithDelay( 3000, function ()
+			composer.removeScene( "game" )
+		end, 1 )
 		composer.gotoScene( "menu", "fade", 2000 )
 	end
 
