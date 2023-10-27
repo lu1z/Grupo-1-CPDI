@@ -4,6 +4,12 @@
     background-color: var(--cor_fundo);
 }
 
+@media(max-width:800px){
+    #cpdi{
+        height: auto;
+    }
+}
+
 .cpdi_titulo h1 {
     color: var(--cor_principal);
     font-size: 100px;
@@ -11,9 +17,20 @@
     padding-top: 6%;
 }
 
-#cpdi h1 span{
-    font-size: 65px;
+@media (max-width:480px){
+    .cpdi_titulo h1{
+        font-size: 70px;}
 }
+
+#cpdi h1 span{
+    font-size: 55px;
+}
+
+@media (max-width:480px){
+    .cpdi_titulo h1 span{
+        font-size: 50px;}
+}
+
 
 .cpdi_bloco{
     display: flex;
@@ -21,6 +38,13 @@
     align-items: center; 
     padding: 3% 7% 0 7%;
 
+}
+
+@media(max-width:800px){
+    .cpdi_bloco{
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 }
 
 
@@ -35,9 +59,22 @@
     -o-border-radius: 5%;
 }
 
+@media(max-width:480px){
+    .cpdi_logo img{
+        max-width: 450px;
+        max-height: 450px;
+    }
+}
+
+
 .cpdi_texto{
     text-align: justify;
-    padding-left: 10%;
+}
+
+@media(min-width:801px){
+    .cpdi_texto {
+        padding-left: 10% ;
+    }
 }
 
 .cpdi_texto h1{
