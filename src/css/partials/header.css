@@ -67,9 +67,10 @@ header{
         position: fixed;
         top: 10vh;
         right: -60%;
+        width: 60%;
         height: 90vh;
-        background-color: var(--cor_principal);
-        border-left: 1.5px solid red;
+        background-color: var(--cor_header);
+        border-left: 1.5px solid var(--cor_principal);
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -77,6 +78,21 @@ header{
         opacity: 0;
 
     }
+
+    .mobile_links a{
+        color: var(--cor_secundaria);
+        font-size: 22px;
+        font-weight: 700;
+    }
+    
+    .mobile_links a:hover{
+        color: var(--cor_principal);
+        font-size: 26px;
+    }
+}
+
+.ativo{
+    position: relative;
 }
 
 .ativo div:nth-child(1){
