@@ -106,7 +106,7 @@ function scene:create( event )
 
 	-- LEITURA INICIAL DA SPRITE SHEET FOGO
 
-	local spriteInicio = graphics.newImageSheet( "/recursos/objetos/fogo.png", {
+	local spriteFogo = graphics.newImageSheet( "/recursos/objetos/fogo.png", {
 		width = 212/8,
 		height = 156/3,
 		numFrames = 24,
