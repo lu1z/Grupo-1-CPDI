@@ -107,11 +107,11 @@ function scene:create( event )
 	-- LEITURA INICIAL DA SPRITE SHEET FOGO
 
 	local spriteFogo = graphics.newImageSheet( "/recursos/objetos/fogo.png", {
-		width = 212/8,
-		height = 156/3,
+		width = 186/8,
+		height = 149/3,
 		numFrames = 24,
-		sheetContentWidth = 212,
-		sheetContentHeight = 156
+		sheetContentWidth = 186,
+		sheetContentHeight = 149
 	} )
 
 	-- ORGANIZAÇÃO DAS ANIMAÇÕES NA SPRITESHEET
