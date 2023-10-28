@@ -19,7 +19,7 @@ function scene:create( event )
 	physics.pause()
 
 	-- Exibição do graficos coloridos para testar o comportamento físico.
-	physics.setDrawMode( "hybrid" )
+	physics.setDrawMode( "normal" )
 	local x = display.contentWidth
 	local y = display.contentHeight
 	local meioX = display.contentCenterX
@@ -95,13 +95,47 @@ function scene:create( event )
 		sheetContentHeight = 156
 	})
 
-	-- ORGANIZAÇÃO DAS ANIMAÇÕES NA SPRITESHEET
+	-- ORGANIZAÇÃO DAS ANIMAÇÕES NA SPRITESHEET BOMBEIRO
 
 	local animacao = {
 		{name = "parado", start = 1, count = 1},
 		{name = "andar", start = 2, count = 4, time = 450, loopCount = 0},
 		{name = "cima", start = 6, count = 2, time = 400, loopCount = 0 },
 		{name = "baixo", start = 8, count = 2, time = 400, loopCount = 0}
+	}
+
+	-- LEITURA INICIAL DA SPRITE SHEET FOGO
+
+	local spriteInicio = graphics.newImageSheet( "/recursos/objetos/fogo_inicio.png", {
+		width = 120/4,
+		height = 32,
+		numFrames = 4,
+		sheetContentWidth = 120
+		sheetContentHeight = 32
+	} )
+
+	local spriteLoop = graphics.newImageSheet( "/recursos/objetos/fogo_loop.png", {
+		width = 192/8,
+		height = 32,
+		numFrames = 8,
+		sheetContentWidth = 192
+		sheetContentHeight = 32
+	} )
+		
+	local spriteFim = graphics.newImageSheet( "/recursos/objetos/fogo_fim.png", {
+		width = 120/5,
+		height = 32,
+		numFrames = 5,
+		sheetContentWidth = 120
+		sheetContentHeight = 32
+	} )
+
+	-- ORGANIZAÇÃO DAS ANIMAÇÕES NA SPRITESHEET
+
+	local animacaoFogo = {
+		{name = "fogoInicio", start = 1, count = 4, time = 800, loopCount = 1 },
+		{name = "fogoLoop", start = 1, count = 8, time = 800, loopCount = 50},
+		{name = "fogoFim", start = 1, count = 5, time = 800, loopCount = 1 }
 	}
 
 	-- ADICIONANDO CORPO JOGADOR
