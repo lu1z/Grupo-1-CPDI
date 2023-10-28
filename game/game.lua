@@ -110,16 +110,16 @@ function scene:create( event )
 		width = 212/8,
 		height = 156/3,
 		numFrames = 24,
-		sheetContentWidth = 212
+		sheetContentWidth = 212,
 		sheetContentHeight = 156
 	} )
 
 	-- ORGANIZAÇÃO DAS ANIMAÇÕES NA SPRITESHEET
 
 	local animacaoFogo = {
-		{name = "fogoInicio", start = 17, count = 4, time = 800, loopCount = 1 },
-		{name = "fogoLoop", start = 1, count = 8, time = 800, loopCount = 50},
-		{name = "fogoFim", start = 9, count = 5, time = 800, loopCount = 1 }
+		{name = "fogoInicio", start = 17, count = 4, time = 500, loopCount = 1 },
+		{name = "fogoLoop", start = 1, count = 8, time = 500, loopCount = 50},
+		{name = "fogoFim", start = 9, count = 5, time = 450, loopCount = 1 }
 	}
 
 	-- ADICIONANDO CORPO JOGADOR
@@ -176,6 +176,15 @@ function scene:create( event )
 		end
 	end
 
+	local function spriteListener( event )
+    local thisSprite = event.target
+
+    if ( event.phase == "ended" ) then 
+        thisSprite:setSequence( "fogoLoop" )
+        thisSprite:play()
+    end
+	end
+
 	local function spawnFire()
 		for i = 1, 5 do
 			local spot = findSpot(objectRefs)
@@ -183,13 +192,18 @@ function scene:create( event )
 				timer.performWithDelay( 14000, burnTrees, 1 )
 				return
 			end
-			local fire = display.newImageRect( groupFires, "crate.png", 30, 30 )
+			local fire = display.newSprite( spriteFogo, animacaoFogo )
 			fire.x, fire.y = objectRefs[spot].x, objectRefs[spot].y;
 			fire.myName = "fire"
 			fire.idx = spot
 			physics.addBody( fire, "static" )
 			objectRefs[spot].hasFire = true
 			objectRefs[spot].fireObject = fire
+			fire:scale(3,3)
+
+			fire:setSequence("fogoInicio")
+			fire:addEventListener( "sprite", spriteListener )
+			fire:play()
 		end
 		timer.performWithDelay( 14000, burnTrees, 1 )
 	end
@@ -199,6 +213,9 @@ function scene:create( event )
 		if not objectRefs[obj.idx].hasFire then
 			return
 		end
+
+		obj:setSequence("fogoFim")
+		obj:play()
 
 		objectRefs[obj.idx].hasFire = false
 		objectRefs[obj.idx].fireObject = nil
