@@ -110,7 +110,7 @@ function scene:create( event )
 		width = 212/8,
 		height = 156/3,
 		numFrames = 24,
-		sheetContentWidth = 212
+		sheetContentWidth = 212,
 		sheetContentHeight = 156
 	} )
 
