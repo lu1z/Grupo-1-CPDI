@@ -107,19 +107,19 @@ function scene:create( event )
 	-- LEITURA INICIAL DA SPRITE SHEET FOGO
 
 	local spriteFogo = graphics.newImageSheet( "/recursos/objetos/fogo.png", {
-		width = 186/8,
-		height = 149/3,
-		numFrames = 24,
-		sheetContentWidth = 186,
-		sheetContentHeight = 149
+		width = 408/17,
+		height = 32,
+		numFrames = 17,
+		sheetContentWidth = 408,
+		sheetContentHeight = 32
 	} )
 
 	-- ORGANIZAÇÃO DAS ANIMAÇÕES NA SPRITESHEET
 
 	local animacaoFogo = {
-		{name = "fogoInicio", start = 17, count = 4, time = 500, loopCount = 1 },
-		{name = "fogoLoop", start = 1, count = 8, time = 500, loopCount = 50},
-		{name = "fogoFim", start = 9, count = 5, time = 450, loopCount = 1 }
+		{name = "fogoInicio", start = 1, count = 4, time = 500, loopCount = 1 },
+		{name = "fogoLoop", start = 10, count = 8, time = 500, loopCount = 0},
+		{name = "fogoFim", start = 5, count = 5, time = 450, loopCount = 1 }
 	}
 
 	-- ADICIONANDO CORPO JOGADOR

@@ -30,6 +30,7 @@ local backgroundVolume = 0.6 -- 60% volume for background music
 local fireVolume = 1.0 -- 100% volume for fire sound
 local explosionVolume = 0.8 -- 80% volume for the explosion sound
 
+composer.gotoScene("game")
 
 -- Function to play background music
 local function playBackgroundMusic()
