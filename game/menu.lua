@@ -111,7 +111,9 @@ end
 function scene:show( event )
 	local sceneGroup = self.view
 	local phase = event.phase
-	
+
+	playBackgroundMusic()
+
 	if phase == "will" then
 		-- Called when the scene is still off screen and is about to move on screen
 	elseif phase == "did" then
