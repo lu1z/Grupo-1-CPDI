@@ -34,8 +34,8 @@
 }
 
 .equipe_blocos div img{
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 220px;
+    max-height: 220px;
     width: auto;
     height: auto;
     box-shadow: 1px 1px 15px 3px var(--cor_header);

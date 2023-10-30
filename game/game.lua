@@ -114,12 +114,28 @@ function scene:create( event )
 		sheetContentHeight = 32
 	} )
 
-	-- ORGANIZAÇÃO DAS ANIMAÇÕES NA SPRITESHEET
+	-- ORGANIZAÇÃO DAS ANIMAÇÕES NA SPRITE SHEET
 
 	local animacaoFogo = {
 		{name = "fogoInicio", start = 1, count = 4, time = 500, loopCount = 1 },
 		{name = "fogoLoop", start = 10, count = 8, time = 500, loopCount = 0},
 		{name = "fogoFim", start = 5, count = 5, time = 450, loopCount = 1 }
+	}
+
+	-- LEITURA INICIAL DA SPRITE SHEET ÁGUA
+
+	local spriteAgua = graphics.newImageSheet( "/recursos/objetos/agua.png", {
+		width = 81/5,
+		height = 44/1,
+		numFrames = 5,
+		sheetContentWidth = 81,
+		sheetContentHeight = 44
+	} )
+
+	-- ANIMAÇÃO DA SPRITE SHEET ÁGUA
+
+	local animacaoAgua = {
+		{name = "jatoAgua", start = 1, count = 5, time = 550, loopCount = 0}
 	}
 
 	-- ADICIONANDO CORPO JOGADOR
@@ -220,11 +236,14 @@ function scene:create( event )
 		objectRefs[obj.idx].hasFire = false
 		objectRefs[obj.idx].fireObject = nil
 
-		local agua = display.newImageRect( groupFires, "crate.png", 100, 10 )
+		local agua = display.newSprite( spriteAgua, animacaoAgua )
 		agua.anchorX = 1
 		agua.anchorY = 0.5
 		agua.x, agua.y = bombeiro.x, bombeiro.y
 		agua.rotation = angleBetweenPoints({ x=obj.x, y=obj.y }, { x=bombeiro.x, y=bombeiro.y })
+		agua:scale (2,3);
+		agua:setSequence("jatoAgua")
+		agua:play()
 
 		timer.performWithDelay( 500, function ()
 			obj:removeSelf()
