@@ -134,7 +134,9 @@ function scene:create( event )
 
 	-- ANIMAÇÃO DA SPRITE SHEET ÁGUA
 
-	local animacaoAgua = {1452
+	local animacaoAgua = {
+		{name = "jatoAgua", start = 1, count = 5, time = 400, loopCount = 1}
+	}
 
 	-- ADICIONANDO CORPO JOGADOR
 
