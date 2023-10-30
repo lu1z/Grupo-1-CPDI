@@ -1,3 +1,3 @@
-AOS.init({
-    disable: window.innerWidth < 800
-});
+// AOS.init({
+//     disable: window.innerWidth < 800
+// });
