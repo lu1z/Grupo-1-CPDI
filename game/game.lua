@@ -37,25 +37,37 @@ function scene:create( event )
 	background.anchorX = 0
 	background.anchorY = 0
 
+	-- ampulheta 
+
+	local ampulheta =display.newImageRect( "/recursos/icones/tempo.png", 32, 32 )
+	ampulheta.x = x*0.48
+	ampulheta.y = y*0.1
+
 	-- timer
 	local textoTempoRestante = display.newText( {
 		text = tempoRestante,     
-    x = meioX,
-    y = y * 0.1,
-    width = 128,
-    font = native.systemFont,   
-    fontSize = 18,
-    align = "center"  -- Alignment parameter
+    	x = meioX,
+    	y = y * 0.1,
+    	width = 128,
+    	font = native.systemFont,   
+    	fontSize = 18,
+    	align = "center"  -- Alignment parameter
 	} )
 
+	-- coração
+	local coracao =display.newImageRect( "/recursos/icones/vida.png", 32, 32 )
+	coracao.x = x*0.48
+	coracao.y = y*0.05
+
+	-- vidas
 	local textoVidas = display.newText( {
 		text = vidas,     
-    x = meioX,
-    y = y * 0.05,
-    width = 128,
-    font = native.systemFont,   
-    fontSize = 18,
-    align = "center"  -- Alignment parameter
+    	x = meioX,
+    	y = y * 0.05,
+    	width = 128,
+    	font = native.systemFont,   
+    	fontSize = 18,
+    	align = "center"  -- Alignment parameter
 	} )
 
 	-- grupo dos fogos
