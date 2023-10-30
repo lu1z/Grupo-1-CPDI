@@ -125,17 +125,17 @@ function scene:create( event )
 	-- LEITURA INICIAL DA SPRITE SHEET ÁGUA
 
 	local spriteAgua = graphics.newImageSheet( "/recursos/objetos/agua.png", {
-		width = 81/5,
-		height = 44/1,
+		width = 220/5,
+		height = 20/1,
 		numFrames = 5,
-		sheetContentWidth = 81,
-		sheetContentHeight = 44
+		sheetContentWidth = 220,
+		sheetContentHeight = 20
 	} )
 
 	-- ANIMAÇÃO DA SPRITE SHEET ÁGUA
 
 	local animacaoAgua = {
-		{name = "jatoAgua", start = 1, count = 5, time = 550, loopCount = 0}
+		{name = "jatoAgua", start = 1, count = 5, time = 400, loopCount = 1}
 	}
 
 	-- ADICIONANDO CORPO JOGADOR
