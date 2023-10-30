@@ -171,6 +171,7 @@ function scene:create( event )
 	end
 
 	local function burnTrees()
+		playExplosionSound()
 		for _,value in ipairs(objectRefs) do
 			if value.hasFire then
 				value.fireObject:removeSelf()
@@ -202,6 +203,7 @@ function scene:create( event )
 	end
 
 	local function spawnFire()
+		playFireSound()
 		for i = 1, 5 do
 			local spot = findSpot(objectRefs)
 			if spot == nil then
@@ -225,6 +227,7 @@ function scene:create( event )
 	end
 	
 	local function mangueirada(obj)
+		playExplosionSound()
 		-- taca agua
 		if not objectRefs[obj.idx].hasFire then
 			return

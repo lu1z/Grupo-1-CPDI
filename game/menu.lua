@@ -14,6 +14,8 @@ local widget = require "widget"
 
 -- forward declarations and other locals
 local playBtn
+local increaseVolumeButton
+local decreaseVolumeButton
 
 -- 'onRelease' event listener for playBtn
 local function onPlayBtnRelease()
@@ -22,6 +24,16 @@ local function onPlayBtnRelease()
 	composer.gotoScene( "game", "fade", 500 )
 	
 	return true	-- indicates successful touch
+end
+
+local function onVolumeUp()
+	changeVolume(0.1)
+	playBackgroundMusic()
+end
+
+local function onVolumeDown()
+	changeVolume(-0.1)
+	playBackgroundMusic()
 end
 
 function scene:create( event )
@@ -66,21 +78,34 @@ function scene:create( event )
 	}
 	playBtn.x = display.contentCenterX
 	playBtn.y = display.contentHeight - 125
-	
+
+	increaseVolumeButton = widget.newButton{
+		labelColor = { default={ 1.0 }, over={ 0.5 } },
+		label = "Volume +",
+		width = 250, height = 80,
+		onRelease = onVolumeUp,	-- event listener function
+		x = x * 0.9,
+		y = y * 0.1
+	}
+
+	decreaseVolumeButton = widget.newButton{
+		labelColor = { default={ 1.0 }, over={ 0.5 } },
+		label = "Volume -",
+		width = 250, height = 80,
+		onRelease = onVolumeDown,	-- event listener function
+		x = x * 0.9,
+		y = y * 0.2
+	}
+
 	-- all display objects must be inserted into group
 
-
-	-- local audio = require("audio")
-	backgroundMusic = audio.loadStream("music.mp3")
-	-- backgroundVolume = 0.6 -- 60% volume for background music
-  -- audio.setVolume(backgroundVolume, { channel = 32 }) 
-  audio.play(backgroundMusic, { channel = 32, loops = -1 })
-	
 	sceneGroup:insert( fundo )
 	sceneGroup:insert( logo )
 	sceneGroup:insert( background )
 	sceneGroup:insert( fumaca )
 	sceneGroup:insert( playBtn )
+	sceneGroup:insert( increaseVolumeButton )
+	sceneGroup:insert( decreaseVolumeButton )
 end
 
 function scene:show( event )
@@ -122,6 +147,14 @@ function scene:destroy( event )
 	if playBtn then
 		playBtn:removeSelf()	-- widgets must be manually removed
 		playBtn = nil
+	end
+	if decreaseVolumeButton then
+		decreaseVolumeButton:removeSelf()	-- widgets must be manually removed
+		decreaseVolumeButton = nil
+	end
+	if increaseVolumeButton then
+		increaseVolumeButton:removeSelf()	-- widgets must be manually removed
+		increaseVolumeButton = nil
 	end
 end
 
