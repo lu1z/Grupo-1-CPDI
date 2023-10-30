@@ -10,9 +10,9 @@ display.setStatusBar( display.HiddenStatusBar )
 -- include the Corona "composer" module
 local composer = require "composer"
 
-backgroundMusic = audio.loadStream("/audio/short-8-bit-background-music-for-video-mobile-game-old-school-164704.mp3")
-fireSound = audio.loadSound( "/audio/mixkit-big-fire-flame-burning-1331.mp3" )
-explosionSound = audio.loadSound( "/audio/archivo.mp3" )
+backgroundMusic = audio.loadStream("/audio/background.mp3")
+fireSound = audio.loadSound( "/audio/fire.mp3" )
+explosionSound = audio.loadSound( "/audio/splash.mp3" )
 
 volume = 1.0
 
