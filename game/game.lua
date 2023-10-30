@@ -237,11 +237,11 @@ function scene:create( event )
 		objectRefs[obj.idx].fireObject = nil
 
 		local agua = display.newSprite( spriteAgua, animacaoAgua )
-		agua.anchorX = 1
+		agua.anchorX = 0
 		agua.anchorY = 0.5
 		agua.x, agua.y = bombeiro.x, bombeiro.y
-		agua.rotation = angleBetweenPoints({ x=obj.x, y=obj.y }, { x=bombeiro.x, y=bombeiro.y })
-		agua:scale (2,3);
+		agua.rotation = 180 + angleBetweenPoints({ x=obj.x, y=obj.y }, { x=bombeiro.x, y=bombeiro.y })
+		agua:scale (3,2);
 		agua:setSequence("jatoAgua")
 		agua:play()
 
