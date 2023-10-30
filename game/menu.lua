@@ -68,6 +68,13 @@ function scene:create( event )
 	playBtn.y = display.contentHeight - 125
 	
 	-- all display objects must be inserted into group
+
+
+	-- local audio = require("audio")
+	backgroundMusic = audio.loadStream("music.mp3")
+	-- backgroundVolume = 0.6 -- 60% volume for background music
+  -- audio.setVolume(backgroundVolume, { channel = 32 }) 
+  audio.play(backgroundMusic, { channel = 32, loops = -1 })
 	
 	sceneGroup:insert( fundo )
 	sceneGroup:insert( logo )
