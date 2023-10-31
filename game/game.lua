@@ -28,6 +28,7 @@ function scene:create( event )
 	local tempoRestante = 120
 
 	local vidas = 10
+	local fogosAtivos = 0
 
 	-- spawnPoints
 	local objectRefs = {}
@@ -234,15 +235,22 @@ function scene:create( event )
 			fire:setSequence("fogoInicio")
 			fire:addEventListener( "sprite", spriteListener )
 			fire:play()
+			fogosAtivos = fogosAtivos + 1
 		end
 		timer.performWithDelay( 14000, burnTrees, 1 )
 	end
 	
 	local function mangueirada(obj)
 		playExplosionSound()
+		playBurningSound()
 		-- taca agua
 		if not objectRefs[obj.idx].hasFire then
 			return
+		end
+
+		fogosAtivos = fogosAtivos - 1
+		if fogosAtivos == 0 then
+			audio.setVolume(0, { channel = 1 })
 		end
 
 		obj:setSequence("fogoFim")
