@@ -47,12 +47,12 @@ function scene:create( event )
 	-- timer
 	local textoTempoRestante = display.newText( {
 		text = tempoRestante,     
-    	x = meioX,
-    	y = y * 0.1,
-    	width = 128,
-    	font = native.systemFont,   
-    	fontSize = 18,
-    	align = "center"  -- Alignment parameter
+		x = meioX,
+		y = y * 0.1,
+		width = 128,
+		font = native.systemFont,   
+		fontSize = 18,
+		align = "center"  -- Alignment parameter
 	} )
 
 	-- coração
@@ -63,12 +63,12 @@ function scene:create( event )
 	-- vidas
 	local textoVidas = display.newText( {
 		text = vidas,     
-    	x = meioX,
-    	y = y * 0.05,
-    	width = 128,
-    	font = native.systemFont,   
-    	fontSize = 18,
-    	align = "center"  -- Alignment parameter
+		x = meioX,
+		y = y * 0.05,
+		width = 128,
+		font = native.systemFont,   
+		fontSize = 18,
+		align = "center"  -- Alignment parameter
 	} )
 
 	-- grupo dos fogos
@@ -216,6 +216,9 @@ function scene:create( event )
 	end
 
 	local function spawnFire()
+		if tempoRestante < 15 then
+			return
+		end
 		playFireSound()
 		playBurningSound()
 		for i = 1, 5 do
