@@ -369,6 +369,8 @@ function scene:create( event )
 	sceneGroup:insert( textoTempoRestante )
 	sceneGroup:insert( textoVidas )
 	sceneGroup:insert( bombeiro )
+	sceneGroup:insert( coracao )
+	sceneGroup:insert( ampulheta )
 end
 
 function scene:show( event )
