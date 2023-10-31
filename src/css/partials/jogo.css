@@ -4,14 +4,14 @@
     text-align: center;
 }
 
-.jogo_conteudo h2{
+.jogo_conteudo h1{
     font-size: 100px;
     color: var(--cor_principal);
-    padding-top: 6%;
+    padding-top: 5%;
 }
 
 @media (max-width:480px){
-    .jogo_conteudo h2{
+    .jogo_conteudo h1{
         font-size: 75px;}
 }
 

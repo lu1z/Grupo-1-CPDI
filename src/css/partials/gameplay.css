@@ -1,0 +1,12 @@
+#gameplay{
+    width: 100%;
+    background-color: var(--cor_fundo);
+    text-align: center;
+}
+
+.gameplay_titulo h1{
+    font-size: 100px;
+    color: var(--cor_principal);
+    padding-top: 5%;
+    padding-bottom: 3%;
+}
