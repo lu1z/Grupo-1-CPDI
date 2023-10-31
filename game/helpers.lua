@@ -9,10 +9,11 @@ function findSpot(refs)
         return i
       end
     end
-  end
-  for i = #refs, 1, -1 do
-    if not refs[i].isBurned and not refs[i].hasFire then
-      return i
+  else
+    for i = #refs, 1, -1 do
+      if not refs[i].isBurned and not refs[i].hasFire then
+        return i
+      end
     end
   end
   -- for i,value in ipairs(refs) do

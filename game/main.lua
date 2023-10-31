@@ -10,6 +10,7 @@ display.setStatusBar( display.HiddenStatusBar )
 -- include the Corona "composer" module
 local composer = require "composer"
 
+-- fonte para os textos principalmente vitoria e derrota
 fonte = "recursos/fonts/Blanka-Regular.otf"
 
 backgroundMusic = audio.loadStream("/audio/background.mp3")
@@ -29,10 +30,10 @@ end
 
 -- Function to play fire sound
 function playFireSound()
-    -- audio.setVolume(volume, { channel = 2 })
     audio.play(fireSound, { duration=2000 })
 end
 
+-- toca o som de madeira queimando
 function playBurningSound()
     audio.setVolume(volume, { channel = 1 })
     audio.play(burningSound, { channel = 1, duration=14000 })
@@ -40,7 +41,6 @@ end
 
 -- Function to play explosion sound
 function playExplosionSound()
-    -- audio.setVolume(volume, { channel = 3 })
     audio.play(explosionSound, { duration=2000 })
 end
 
