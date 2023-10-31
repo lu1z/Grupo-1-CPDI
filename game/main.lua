@@ -31,7 +31,7 @@ end
 -- Function to play explosion sound
 function playExplosionSound()
     -- audio.setVolume(volume, { channel = 3 })
-    audio.play(explosionSound, { duration=3000 })
+    audio.play(explosionSound, { duration=2000 })
 end
 
 function changeVolume(vol)
