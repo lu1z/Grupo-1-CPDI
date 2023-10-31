@@ -25,8 +25,8 @@ function scene:create( event )
 	local meioX = display.contentCenterX
 	local meioY = display.contentCenterY
 
+	-- status
 	local tempoRestante = 120
-
 	local vidas = 10
 	local fogosAtivos = 0
 
@@ -39,7 +39,6 @@ function scene:create( event )
 	background.anchorY = 0
 
 	-- ampulheta 
-
 	local ampulheta =display.newImageRect( "/recursos/icones/tempo.png", 32, 32 )
 	ampulheta.x = x*0.48
 	ampulheta.y = y*0.1
@@ -160,10 +159,9 @@ function scene:create( event )
 	-- corpos de colisao box para o peronagem e circulo para a mangueira
 	physics.addBody( bombeiro, "dynamic", {
 		box = {x = 2, y = 0, halfWidth = 7, halfHeight = 15}, myName = "bombeiro", isSensor=true},
-		{ radius = 100, myName = "mangueira", isSensor=true } 
+		{ radius = 100, myName = "mangueira", isSensor=true }
   )
-	-- bombeiro.id = "bombeiroID"
-	bombeiro.direcao = "andar"
+	-- bombeiro.direcao = "andar"
 	bombeiro.myName = "bombeiro"
 	bombeiro.isFixedRotation = true
 	bombeiro:setSequence("parado")
@@ -184,7 +182,7 @@ function scene:create( event )
 	end
 
 	local function burnTrees()
-		playExplosionSound()
+		playFireSound()
 		for _,value in ipairs(objectRefs) do
 			if value.hasFire then
 				value.fireObject:removeSelf()
@@ -244,12 +242,13 @@ function scene:create( event )
 		timer.performWithDelay( 14000, burnTrees, 1 )
 	end
 	
+	-- taca agua
 	local function mangueirada(obj)
-		playExplosionSound()
-		-- taca agua
 		if not objectRefs[obj.idx].hasFire then
 			return
 		end
+
+		playExplosionSound()
 
 		fogosAtivos = fogosAtivos - 1
 		if fogosAtivos == 0 then
