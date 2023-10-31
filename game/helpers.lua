@@ -3,11 +3,23 @@ function randomCoordinate()
 end
 
 function findSpot(refs)
-  for i,value in ipairs(refs) do
-    if not value.isBurned and not value.hasFire then
+  if math.random(1, 2) == 1 then
+    for i = 1, #refs do
+      if not refs[i].isBurned and not refs[i].hasFire then
+        return i
+      end
+    end
+  end
+  for i = #refs, 1, -1 do
+    if not refs[i].isBurned and not refs[i].hasFire then
       return i
     end
   end
+  -- for i,value in ipairs(refs) do
+  --   if not value.isBurned and not value.hasFire then
+  --     return i
+  --   end
+  -- end
   return nil
 end
 
