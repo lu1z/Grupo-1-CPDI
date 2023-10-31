@@ -10,3 +10,9 @@
     padding-top: 5%;
     padding-bottom: 3%;
 }
+
+ .gameplay_video video{
+    width: 90%;
+    height: 80%;
+}
+

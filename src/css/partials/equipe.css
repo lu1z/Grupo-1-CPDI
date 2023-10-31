@@ -11,10 +11,6 @@
     padding-bottom: 5%;
 }
 
-@media (max-width:480px){
-    #equipe h1{
-        font-size: 65px;}
-}
 
 .equipe_blocos{
     display: flex;
@@ -37,6 +33,7 @@
 .equipe_blocos div img{
     max-width: 220px;
     max-height: 220px;
+    align-self: center;
     width: auto;
     height: auto;
     box-shadow: 1px 1px 15px 3px var(--cor_header);

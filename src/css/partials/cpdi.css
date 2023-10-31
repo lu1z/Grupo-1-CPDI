@@ -28,8 +28,8 @@
 
 @media (max-width:480px){
     .cpdi_titulo h1 span{
-        font-size: 50px;}
-}
+        display: none;
+}}
 
 
 .cpdi_bloco{
@@ -61,8 +61,8 @@
 
 @media(max-width:480px){
     .cpdi_logo img{
-        max-width: 450px;
-        max-height: 450px;
+        max-width: 300px;
+        max-height: 300px;
     }
 }
 
@@ -71,7 +71,7 @@
     text-align: justify;
 }
 
-@media(min-width:801px){
+@media(min-width:800px){
     .cpdi_texto {
         padding-left: 10% ;
     }
