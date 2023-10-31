@@ -80,21 +80,19 @@ function scene:create( event )
 	playBtn.y = display.contentHeight - 125
 
 	increaseVolumeButton = widget.newButton{
-		labelColor = { default={ 1.0 }, over={ 0.5 } },
-		label = "Volume +",
-		width = 250, height = 80,
+		defaultFile = "/recursos/icones/volumeUp.png",
+		width = 80, height = 80,
 		onRelease = onVolumeUp,	-- event listener function
 		x = x * 0.9,
 		y = y * 0.1
 	}
 
 	decreaseVolumeButton = widget.newButton{
-		labelColor = { default={ 1.0 }, over={ 0.5 } },
-		label = "Volume -",
-		width = 250, height = 80,
+		defaultFile = "/recursos/icones/volumeDown.png",
+		width = 80, height = 80,
 		onRelease = onVolumeDown,	-- event listener function
-		x = x * 0.9,
-		y = y * 0.2
+		x = x * 0.896,
+		y = y * 0.15
 	}
 
 	-- all display objects must be inserted into group
