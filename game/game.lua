@@ -217,6 +217,7 @@ function scene:create( event )
 
 	local function spawnFire()
 		playFireSound()
+		playBurningSound()
 		for i = 1, 5 do
 			local spot = findSpot(objectRefs)
 			if spot == nil then
@@ -242,7 +243,6 @@ function scene:create( event )
 	
 	local function mangueirada(obj)
 		playExplosionSound()
-		playBurningSound()
 		-- taca agua
 		if not objectRefs[obj.idx].hasFire then
 			return
