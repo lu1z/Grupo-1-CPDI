@@ -70,7 +70,6 @@ function scene:create( event )
 
 	-- create a widget button (which will loads level1.lua on release)
 	playBtn = widget.newButton{
-		labelColor = { default={ 1.0 }, over={ 0.5 } },
 		defaultFile = "/recursos/botao/playum.png",
 		overFile = "/recursos/botao/playdois.png",
 		width = 250, height = 80,
@@ -80,19 +79,21 @@ function scene:create( event )
 	playBtn.y = display.contentHeight - 125
 
 	increaseVolumeButton = widget.newButton{
-		defaultFile = "/recursos/icones/volumeUp.png",
+		defaultFile = "/recursos/icones/volumeUpUm.png",
+		overFile = "/recursos/icones/volumeUpDois.png",
 		width = 80, height = 80,
 		onRelease = onVolumeUp,	-- event listener function
-		x = x * 0.9,
+		x = x * 0.95,
 		y = y * 0.1
 	}
 
 	decreaseVolumeButton = widget.newButton{
-		defaultFile = "/recursos/icones/volumeDown.png",
+		defaultFile = "/recursos/icones/volumeDownUm.png",
+		overFile = "/recursos/icones/volumeDownDois.png",
 		width = 80, height = 80,
 		onRelease = onVolumeDown,	-- event listener function
-		x = x * 0.896,
-		y = y * 0.15
+		x = x * 0.95,
+		y = y * 0.2
 	}
 
 	-- all display objects must be inserted into group
