@@ -50,7 +50,7 @@ function scene:create( event )
 		x = meioX,
 		y = y * 0.1,
 		width = 128,
-		font = native.systemFont,   
+		font = fonte,   
 		fontSize = 18,
 		align = "center"  -- Alignment parameter
 	} )
@@ -66,7 +66,7 @@ function scene:create( event )
 		x = meioX,
 		y = y * 0.05,
 		width = 128,
-		font = native.systemFont,   
+		font = fonte,   
 		fontSize = 18,
 		align = "center"  -- Alignment parameter
 	} )
@@ -175,8 +175,8 @@ function scene:create( event )
 			x = meioX,
 			y = meioY,
 			width = 512,
-			font = native.systemFont,   
-			fontSize = 60,
+			font = fonte,   
+			fontSize = 96,
 			align = "center"  -- Alignment parameter
 		} ) )
 		cleanup()
@@ -334,8 +334,8 @@ function scene:create( event )
 			x = meioX,
 			y = meioY,
 			width = 512,
-			font = native.systemFont,   
-			fontSize = 60,
+			font = fonte,   
+			fontSize = 96,
 			align = "center"  -- Alignment parameter
 		} ) )
 		cleanup()
