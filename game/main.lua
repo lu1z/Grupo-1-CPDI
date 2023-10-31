@@ -25,13 +25,13 @@ end
 -- Function to play fire sound
 function playFireSound()
     audio.setVolume(volume, { channel = 2 })
-    audio.play(fireSound, { channel = 2 })
+    audio.play(fireSound, { channel = 2, duration=2000 })
 end
 
 -- Function to play explosion sound
 function playExplosionSound()
     audio.setVolume(volume, { channel = 3 })
-    audio.play(explosionSound, { channel = 3 })
+    audio.play(explosionSound, { channel = 3, duration=3000 })
 end
 
 function changeVolume(vol)
