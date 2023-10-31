@@ -18,20 +18,20 @@ volume = 1.0
 
 -- Function to play background music
 function playBackgroundMusic()
-    audio.setVolume(volume, { channel = 32 })
+    audio.setVolume(volume)
     audio.play(backgroundMusic, { channel = 32, loops = -1 })
 end
 
 -- Function to play fire sound
 function playFireSound()
-    audio.setVolume(volume, { channel = 2 })
-    audio.play(fireSound, { channel = 2, duration=2000 })
+    -- audio.setVolume(volume, { channel = 2 })
+    audio.play(fireSound, { duration=2000 })
 end
 
 -- Function to play explosion sound
 function playExplosionSound()
-    audio.setVolume(volume, { channel = 3 })
-    audio.play(explosionSound, { channel = 3, duration=3000 })
+    -- audio.setVolume(volume, { channel = 3 })
+    audio.play(explosionSound, { duration=3000 })
 end
 
 function changeVolume(vol)
